@@ -2,7 +2,7 @@
 
 namespace Wtw\backend\services;
 
-use Wtw\backend\services\RemoteRepository;
+use Wtw\backend\services\MoviesRepository;
 use Wtw\backend\services\HttpClient;
 
 /**
@@ -12,7 +12,7 @@ use Wtw\backend\services\HttpClient;
  * @param HttpClient $httpClient Http client for connecting to an external service
  * @param string     $idData     Movie ID
  */
-class MovieRepository implements RemoteRepository
+class OmdbRepository implements MoviesRepository
 {
     /**
      * @var ClientInterface PSR compatible http client

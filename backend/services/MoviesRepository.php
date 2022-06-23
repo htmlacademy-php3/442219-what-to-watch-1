@@ -7,7 +7,7 @@ namespace Wtw\backend\services;
  *
  * @param string $idData Information Identifier
  */
-interface RemoteRepository
+interface MoviesRepository
 {
     public function getData(string $idData);
 }
