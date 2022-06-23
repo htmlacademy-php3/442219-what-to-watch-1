@@ -21,8 +21,13 @@ class HttpClient
 
     public function sendRequest(string $imdbId)
     {
-        $client = new Client(['base_uri' => 'http://www.omdbapi.com']);
+        $client = new Client();
 
-        return $client->request('GET', '?i=' . $imdbId . '&apikey=' . $this->apikey);
+        return $client->request('GET', 'http://www.omdbapi.com', [
+            'query' => [
+                'apikey' => $this->apikey,
+                'i' => $imdbId,
+            ]
+        ]);
     }
 }
