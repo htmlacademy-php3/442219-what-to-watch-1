@@ -4,8 +4,6 @@ namespace Wtw\backend\services;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
-use Wtw\backend\services\MoviesRepository;
-use Wtw\backend\services\HttpClient;
 
 /**
  * Repository for getting information about a movie by its ID from an external service
