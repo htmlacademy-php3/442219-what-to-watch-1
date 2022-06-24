@@ -1,0 +1,17 @@
+{
+    "name": "igorviv/what-to-watch",
+    "autoload": {
+        "psr-4": {
+            "Wtw\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "IgorViV",
+            "email": "iupgrader@mail.ru"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.4"
+    }
+}
