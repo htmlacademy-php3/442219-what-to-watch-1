@@ -28,10 +28,10 @@ class PromoController extends Controller
      * @api {get} /api/promo/{id}
      *
      * @param  Request  $request
-     * @param  int $idFilm
+     * @param  int $id ID film
      * @return SuccesResponse|Response
      */
-    public function store(Request $request, int $idFilm): SuccesResponse|Response
+    public function store(Request $request, int $id): SuccesResponse|Response
     {
         // Метод доступен только аутентифицированному пользователю с ролью модератор.
         // При отсутствии запрошенного фильма в базе - ошибка 404 (HTTP_NOT_FOUND).

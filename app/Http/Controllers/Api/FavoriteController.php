@@ -28,10 +28,10 @@ class FavoriteController extends Controller
      * @api {get} /api/films/{id}/favorite
      *
      * @param  Request  $request
-     * @param  int  $idFilm
+     * @param  int  $id ID film
      * @return SuccesResponse|Response
      */
-    public function store(Request $request, int $idFilm): SuccesResponse|Response
+    public function store(Request $request, int $id): SuccesResponse|Response
     {
         // добавления несуществующего фильма - ошибка 404 (HTTP_NOT_FOUND)
         // попытка добавления в избранное фильма который уже присутствует
@@ -45,10 +45,10 @@ class FavoriteController extends Controller
      *
      * @api {delete} /api/films/{id}/favorite
      *
-     * @param  int  $idFilm
+     * @param  int  $id ID film
      * @return SuccesResponse|Response
      */
-    public function destroy(int $idFilm): SuccesResponse|Response
+    public function destroy(int $id): SuccesResponse|Response
     {
         // попытка удаления несуществующего фильма - ошибка 404.
         // попытка удаления фильма который отсутствует в списке пользователя — ошибка 422,
