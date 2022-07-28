@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('promo', function (Blueprint $table) {
             $table->id();
-//            $table->string('title', 50);
-//            $table->text('content');
-//            $table->float('price');
-//            $table->index('created_at');
             $table->timestamps();
+            $table->bigInteger('film_id')
+                ->unsigned();
+            $table->foreign('film_id')
+                ->references('id')
+                ->on('films')
+                ->onDelete('cascade');
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('promo');
     }
 };
