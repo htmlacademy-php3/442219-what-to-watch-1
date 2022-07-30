@@ -13,10 +13,10 @@ class LogoutController extends Controller
      *
      * @api {post} /api/login
      *
-     * @param  int  $idUser
+     * @param  int  $id ID user
      * @return SuccesResponse|Response
      */
-    public function destroy(int $idUser): SuccesResponse|Response
+    public function destroy(int $id): SuccesResponse|Response
     {
         // Уничтожение токена пользовательской аутентификации.
         // HTTP_OK

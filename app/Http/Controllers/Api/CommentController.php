@@ -15,10 +15,10 @@ class CommentController extends Controller
      * @api {post} /api/films/{id}/comments
      *
      * @param  Request  $request
-     * @param  int  $idFilm
+     * @param  int  $id ID film
      * @return SuccesResponse|Response
      */
-    public function store(Request $request, int $idFilm): SuccesResponse|Response
+    public function store(Request $request, int $id): SuccesResponse|Response
     {
         // Комментарий может быть добавлен отдельно, так и в ответ на другой,
         // в этом случае в теле запроса указывается и comment_id.
@@ -31,10 +31,10 @@ class CommentController extends Controller
      *
      * @api {get} /api/films/{id}/comments
      *
-     * @param  int  $idFilm
+     * @param  int  $id ID film
      * @return SuccesResponse|Response
      */
-    public function show(int $idFilm): SuccesResponse|Response
+    public function show(int $id): SuccesResponse|Response
     {
         // Возвращает список отзывов.
         // Каждый отзыв содержит: текст отзыва, имя автора, дату написания отзыва.
@@ -49,10 +49,10 @@ class CommentController extends Controller
      * @api {patch} /api/comments/{comment}
      *
      * @param  Request  $request
-     * @param  int  $idComment
+     * @param  int  $id ID comment
      * @return SuccesResponse|Response
      */
-    public function update(Request $request, int $idComment): SuccesResponse|Response
+    public function update(Request $request, int $id): SuccesResponse|Response
     {
         // Пользователь может отредактировать свой комментарий.
         // Модератор может отредактировать любой комментарий
@@ -64,10 +64,10 @@ class CommentController extends Controller
      *
      * @api {delete} /api/comments/{comment}
      *
-     * @param  int  $idComment
+     * @param  int  $id ID comment
      * @return SuccesResponse|Response
      */
-    public function destroy(int $idComment): SuccesResponse|Response
+    public function destroy(int $id): SuccesResponse|Response
     {
         // Пользователь может удалить свой комментарий.
         // Модератор может удалить любой комментарий

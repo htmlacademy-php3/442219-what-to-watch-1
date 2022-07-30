@@ -26,10 +26,10 @@ class UserController extends Controller
      *
      * @api {get} /api/user
      *
-     * @param  int  $idUser
+     * @param  int  $id ID user
      * @return SuccesResponse|Response
      */
-    public function show(int $idUser): SuccesResponse|Response
+    public function show(int $id): SuccesResponse|Response
     {
         // чтение в БД информации о текущем пользователе
         // возвращает информацию о пользователе: имя, email, аватар и роль пользователя.
@@ -43,10 +43,10 @@ class UserController extends Controller
      * @api {patch} /api/user
      *
      * @param  Request  $request
-     * @param  int  $idUser
+     * @param  int  $id
      * @return SuccesResponse|Response
      */
-    public function update(Request $request, int $idUser): SuccesResponse|Response
+    public function update(Request $request, int $id): SuccesResponse|Response
     {
         // валидация формы
         // если не успешно, то возвращаем ошибка валидации

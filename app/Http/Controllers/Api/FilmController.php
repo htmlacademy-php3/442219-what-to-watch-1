@@ -59,10 +59,10 @@ class FilmController extends Controller
      *
      * @api {get} /api/films/{id}
      *
-     * @param  int  $idFilm
+     * @param  int  $id ID film
      * @return SuccesResponse|Response
      */
-    public function show(int $idFilm): SuccesResponse|Response
+    public function show(int $id): SuccesResponse|Response
     {
         // возвращает информацию о фильме.
         // если фильм не существует 404:
@@ -77,10 +77,10 @@ class FilmController extends Controller
      * @api {patch} /api/films/{id}
      *
      * @param  Request  $request
-     * @param  int  $idFilm
+     * @param  int  $id ID film
      * @return SuccesResponse|Response
      */
-    public function update(Request $request, int $idFilm): SuccesResponse|Response
+    public function update(Request $request, int $id): SuccesResponse|Response
     {
         // используется как часть функциональности формы добавления фильма в базу.
         // Метод доступен только аутентифицированному пользователю с ролью модератор.
@@ -96,10 +96,10 @@ class FilmController extends Controller
      *
      * @api {get} /api/films/{id}/similar
      *
-     * @param int $idFilm
+     * @param int $id ID film
      * @return SuccesResponse|Response
      */
-    public function getSimilar(int $idFilm): SuccesResponse|Response
+    public function getSimilar(int $id): SuccesResponse|Response
     {
         // метод возвращает список из 4 подходящих фильмов.
         // Похожесть определяется принадлежностью к тем же жанрам,
