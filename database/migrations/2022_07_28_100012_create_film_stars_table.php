@@ -15,18 +15,18 @@ return new class extends Migration
     {
         Schema::create('film_stars', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('film_id')
-                ->unsigned();
-            $table->bigInteger('star_id')
-                ->unsigned();
+            $table->unsignedBigInteger('film_id');
+            $table->unsignedBigInteger('star_id');
             $table->foreign('film_id')
                 ->references('id')
                 ->on('films')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->foreign('star_id')
                 ->references('id')
                 ->on('stars')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
