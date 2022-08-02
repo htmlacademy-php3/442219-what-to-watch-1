@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Director extends Model
 {
     use HasFactory;
+
+    public function films(): BelongsToMany
+    {
+        return $this->belongsToMany(Film::class);
+    }
 }
