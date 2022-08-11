@@ -16,22 +16,23 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->text('text')
+            $table->string('text', 400);
+            $table->tinyInteger('rating')
                 ->nullable();
-            $table->tinyInteger('rating');
-            $table->integer('comment_id');
-            $table->bigInteger('film_id')
-                ->unsigned();
-            $table->bigInteger('author_id')
-                ->unsigned();
+            $table->integer('comment_id')
+                ->nullable();
+            $table->unsignedBigInteger('film_id');
+            $table->unsignedBigInteger('author_id');
             $table->foreign('film_id')
                 ->references('id')
                 ->on('films')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->foreign('author_id')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

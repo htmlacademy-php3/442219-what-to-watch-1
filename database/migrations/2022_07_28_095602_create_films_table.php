@@ -16,22 +16,30 @@ return new class extends Migration
         Schema::create('films', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name', 128)
+            $table->string('name', 255);
+            $table->string('poster_image', 255)
                 ->nullable();
-            $table->string('poster_image', 500);
-            $table->string('preview_image', 500);
-            $table->string('background_image', 500);
-            $table->char('background_color', 7);
-            $table->string('video_link', 500);
-            $table->string('preview_video_link', 500);
-            $table->text('description');
-            $table->decimal('rating', 2, 1);
-            $table->smallInteger('run_time');
-            $table->year('released');
-            $table->tinyInteger('status')
+            $table->string('preview_image', 255)
                 ->nullable();
+            $table->string('background_image', 255);
+            $table->char('background_color', 9)
+                ->default("#ffffff");
+            $table->string('video_link', 255)
+                ->nullable();
+            $table->string('preview_video_link', 255)
+                ->nullable();
+            $table->string('description', 1000)
+                ->nullable();
+            $table->decimal('rating', 2, 1)
+                ->nullable();
+            $table->smallInteger('run_time')
+                ->nullable();
+            $table->year('released')
+                ->nullable();
+            $table->tinyInteger('status');
+//          статус из списка: pending, on moderation, ready
             $table->string('imdb_id', 25)
-                ->nullable();
+                ->unique();
         });
     }
 

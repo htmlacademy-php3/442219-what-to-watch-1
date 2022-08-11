@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('promo', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->bigInteger('film_id')
-                ->unsigned();
+            $table->unsignedBigInteger('film_id');
             $table->foreign('film_id')
                 ->references('id')
                 ->on('films')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
