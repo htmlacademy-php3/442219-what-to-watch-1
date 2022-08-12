@@ -18,7 +18,7 @@ Route::post('/register', [\App\Http\Controllers\Api\RegisterController::class, '
 Route::post('/login', [\App\Http\Controllers\Api\LoginController::class, 'store']);
 
 Route::middleware('auth:sanctum')->post('/logout',
-    [\App\Http\Controllers\Api\LogoutController::class, 'destroy']);
+    [\App\Http\Controllers\Api\LogoutController::class, 'logout']);
 
 Route::prefix('user')->middleware('auth:sanctum')->group(function () {
     Route::get('/', [\App\Http\Controllers\Api\UserController::class, 'show']);
