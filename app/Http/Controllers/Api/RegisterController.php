@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Http\Responses\SuccesResponse;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
 class RegisterController extends Controller
@@ -12,12 +13,12 @@ class RegisterController extends Controller
     /**
      * Registers a new user.
      *
+     * @param UserRequest $request
+     * @return SuccesResponse|Response
      * @api {post} /api/register
      *
-     * @param  Request  $request
-     * @return SuccesResponse|Response
      */
-    public function store(Request $request): SuccesResponse|Response
+    public function store(UserRequest $request): SuccesResponse|Response
     {
         // Валидация полученных полей (Имя, email, пароль и подтверждение пароля).
         // Проверка наличия обязательных полей и соответствия заданным правилам.
@@ -26,6 +27,15 @@ class RegisterController extends Controller
         // Сохранение аватара в публичное хранилище и указание ссылки на файл в таблице пользователей.
         // Возвращение токена для аутентификации пользователя под зарегистрированной учетной записью.
         // HTTP_OK
-        return new SuccesResponse();
+        $params = $request->safe()->except('file');
+        $user = User::create($params);
+        $token = $user->createToken('auth-token');
+
+        return new SuccesResponse([
+            'user' => $user,
+            'token' => $token->plainTextToken,
+        ], 201);
     }
+
+
 }
