@@ -22,13 +22,13 @@ return new class extends Migration
             $table->integer('comment_id')
                 ->nullable();
             $table->unsignedBigInteger('film_id');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('film_id')
                 ->references('id')
                 ->on('films')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreign('author_id')
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade')

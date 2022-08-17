@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('avatar_url', 500)
                 ->nullable();
-            $table->boolean('is_moderator');
+            $table->boolean('is_moderator')->default(0);
         });
     }
 

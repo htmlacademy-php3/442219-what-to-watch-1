@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Film extends Model
@@ -28,21 +29,21 @@ class Film extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_films');
     }
 
     public function directors(): BelongsToMany
     {
-        return $this->belongsToMany(Director::class);
+        return $this->belongsToMany(Director::class, 'film_directors');
     }
 
     public function stars(): BelongsToMany
     {
-        return $this->belongsToMany(Star::class);
+        return $this->belongsToMany(Star::class, 'film_stars');
     }
 
     public function genres(): BelongsToMany
     {
-        return $this->belongsToMany(Genre::class);
+        return $this->belongsToMany(Genre::class, 'film_genres');
     }
 }
