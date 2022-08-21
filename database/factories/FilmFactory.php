@@ -36,8 +36,26 @@ class FilmFactory extends Factory
             'rating' => $this->faker->randomFloat(1, 1, 10),
             'run_time' => $this->faker->randomNumber(3, false),
             'released' => $this->faker->year(),
-            'status' => 1,
+            'status' => Film::FILM_PENDING,
             'imdb_id' => $this->faker->word(),
         ];
+    }
+
+    public function filmOnModerate()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Film::FILM_MODERATE,
+            ];
+        });
+    }
+
+    public function filmIsReady()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Film::FILM_READY,
+            ];
+        });
     }
 }

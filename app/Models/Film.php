@@ -12,6 +12,22 @@ class Film extends Model
 {
     use HasFactory;
 
+    /**
+     * Film status
+     */
+    public const FILM_PENDING = 0;
+    public const FILM_MODERATE = 1;
+    public const FILM_READY = 2;
+
+    /**
+     * Default film status.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'status' => self::FILM_PENDING,
+    ];
+
     public function promo(): HasOne
     {
         return $this->hasOne(Promo::class);
@@ -45,5 +61,36 @@ class Film extends Model
     public function genres(): BelongsToMany
     {
         return $this->belongsToMany(Genre::class, 'film_genres');
+    }
+
+    /**
+     * Calculates the rating of the film.
+     *
+     * @return float
+     */
+    public function getTotalRating(): float
+    {
+        $comments = $this->comments();
+        return (float) round($comments->sum('rating') / $comments->count(), 1);
+    }
+
+    /**
+     * Film status On moderation.
+     *
+     * @return bool
+     */
+    public function isModerate()
+    {
+        return $this->status === self::FILM_MODERATE;
+    }
+
+    /**
+     * Film status Is ready.
+     *
+     * @return bool
+     */
+    public function isReady()
+    {
+        return $this->status === self::FILM_READY;
     }
 }

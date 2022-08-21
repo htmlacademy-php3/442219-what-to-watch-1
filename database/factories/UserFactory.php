@@ -47,4 +47,18 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    /**
+     * Sets the role of the moderator user.
+     *
+     * @return UserFactory
+     */
+    public function moderator()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_moderator' => User::ROLE_MODERATOR,
+            ];
+        });
+    }
 }
