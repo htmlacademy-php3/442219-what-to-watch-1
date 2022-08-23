@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comment extends Model
 {
@@ -16,6 +17,20 @@ class Comment extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)
+            ->withDefault([
+            'name' => 'Anonymous',
+        ]);
+    }
+
+    public function userName()
+    {
+        $userName = $this->user()->name();
+
+        if ($userName === null) {
+            return 'Anonymous';
+        }
+
+        return $userName;
     }
 }
