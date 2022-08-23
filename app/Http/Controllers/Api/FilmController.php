@@ -21,6 +21,8 @@ class FilmController extends Controller
         $this->filmModel = $filmModel;
     }
 
+    // TODO add a method for calculating the rating of a movie
+
     /**
      * Getting a list of movies.
      *
