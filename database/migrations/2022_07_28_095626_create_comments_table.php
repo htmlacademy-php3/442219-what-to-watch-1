@@ -18,8 +18,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('text', 400);
             $table->tinyInteger('rating')
-                ->nullable();
+                ->default(1);
             $table->integer('comment_id')
+                ->constrained('comments')
                 ->nullable();
             $table->unsignedBigInteger('film_id');
             $table->unsignedBigInteger('user_id');

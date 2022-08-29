@@ -16,8 +16,21 @@ class GenreFactory extends Factory
      */
     public function definition()
     {
+        $genreTypes = [
+            'триллер',
+            'мелодрама',
+            'боевик',
+            'драма',
+            'ужасы',
+            'вестерн',
+            'приключение',
+            'фантастика',
+        ];
+
         return [
-            //
+            'title' => $this->faker->randomElement($genreTypes),
+            'created_at' => $this->faker->dateTime(),
+            'updated_at' => $this->faker->dateTime(),
         ];
     }
 }

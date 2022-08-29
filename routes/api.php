@@ -26,12 +26,13 @@ Route::prefix('user')->middleware('auth:sanctum')->group(function () {
 });
 
 Route::group(['prefix' => 'films'], function () {
-    Route::get('/', [\App\Http\Controllers\Api\FilmController::class, 'index']);                      // all users
-    Route::patch('/{id}', [\App\Http\Controllers\Api\FilmController::class, 'show']);                 // all users
+    Route::get('/', [\App\Http\Controllers\Api\FilmController::class, 'index'])->name('films.index'); // all users
+    Route::get('/{id}', [\App\Http\Controllers\Api\FilmController::class, 'show'])->name('films.show');                 // all users
     Route::get('/{id}/similar', [\App\Http\Controllers\Api\FilmController::class, 'getSimilar'])      // all users
     ->where('id', '\d+');
-    Route::get('/{id}/comments', [\App\Http\Controllers\Api\CommentController::class, 'show'])        // all users
-    ->where('id', '\d+');
+    Route::get('/{id}/comments', [\App\Http\Controllers\Api\CommentController::class, 'show'])
+        ->name('comments.show')
+        ->where('id', '\d+');                                                             // all users
 });
 
 Route::prefix('films')->middleware('auth:sanctum')->group(function () {
@@ -44,20 +45,23 @@ Route::prefix('films')->middleware('auth:sanctum')->group(function () {
         ->where('id', '\d+');
 
     Route::post('/{id}/comments', [\App\Http\Controllers\Api\CommentController::class, 'store'])
-        ->where('id', '\d+');
+        ->where('id', '\d+')->name('comments.store');
 });
 
-Route::get('genres/', [\App\Http\Controllers\Api\GenreController::class, 'index']);                   // all users
+Route::get('genres/', [\App\Http\Controllers\Api\GenreController::class, 'index'])
+    ->name('genres.index');                                                                        // all users
 
 Route::prefix('genres')->middleware('auth:sanctum')->group(function () {
-    Route::patch('/{genre}', [\App\Http\Controllers\Api\GenreController::class, 'update']);           // moderator
+    Route::patch('/{genre}', [\App\Http\Controllers\Api\GenreController::class, 'update'])
+        ->name('genres.update');                                                                   // moderator
 });
 
 Route::middleware('auth:sanctum')->get('/favorite', [\App\Http\Controllers\Api\FavoriteController::class, 'index']);
 
 Route::prefix('comments')->middleware('auth:sanctum')->group(function () {
     Route::patch('/{comment}', [\App\Http\Controllers\Api\CommentController::class, 'update']);
-    Route::delete('/{comment}', [\App\Http\Controllers\Api\CommentController::class, 'destroy']);
+    Route::delete('/{comment}', [\App\Http\Controllers\Api\CommentController::class, 'destroy'])
+        ->name('comments.destroy');
 });
 
 Route::prefix('promo')->middleware('auth:sanctum')->group(function () {

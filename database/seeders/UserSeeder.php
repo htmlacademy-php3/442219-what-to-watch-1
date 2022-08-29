@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->count(5)
-            ->has(Film::factory()->has(Comment::factory()))
+            ->has(Film::factory()->has(Comment::factory(3)))
             ->create();
     }
 }

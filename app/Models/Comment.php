@@ -10,6 +10,17 @@ class Comment extends Model
 {
     use HasFactory;
 
+    /**
+     * Attributes for which mass assignment of values is allowed.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'film_id',
+        'text',
+        'user_id',
+    ];
+
     public function film(): BelongsTo
     {
         return $this->belongsTo(Film::class);

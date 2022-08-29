@@ -3,38 +3,23 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Responses\SuccesResponse;
+use App\Models\Film;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\JsonResponse;
 
 class FilmController extends Controller
 {
-    protected $filmModel;
-
-    /**
-     * FilmController constructor.
-     *
-     * @param $filmModel
-     */
-    public function __construct($filmModel)
-    {
-        $this->filmModel = $filmModel;
-    }
-
-    // TODO add a method for calculating the rating of a movie
 
     /**
      * Getting a list of movies.
      *
+     * @return JsonResponse|Responsable
      * @api {get} /api/films
-     *
-     * @return SuccesResponse|Response
      */
-    public function index(): SuccesResponse|Response
+    public function index(): JsonResponse|Responsable
     {
-        // возвращает первые 8 фильмов плюс пагинация если требуется.
-        // HTTP_OK
-        return new SuccesResponse();
+        return $this->successPaginate(Film::select(['id', 'name'])->paginate(8));
     }
 
     /**
@@ -43,9 +28,9 @@ class FilmController extends Controller
      * @api {post} /api/films
      *
      * @param  Request  $request
-     * @return SuccesResponse|Response
+     * @return JsonResponse|Responsable
      */
-    public function store(Request $request): SuccesResponse|Response
+    public function store(Request $request): JsonResponse|Responsable
     {
         // добавляет информацию о фильме в базу данных.
         //
@@ -53,7 +38,7 @@ class FilmController extends Controller
         // HTTP_UNPROCESSABLE_ENTITY
         // Или все ОК - HTTP_OK
         // При сохранении проверяем наличие связанных жанров и создаем при отсутствии.
-        return new SuccesResponse();
+        return $this->success();
     }
 
     /**
@@ -62,15 +47,15 @@ class FilmController extends Controller
      * @api {get} /api/films/{id}
      *
      * @param  int  $id ID film
-     * @return SuccesResponse|Response
+     * @return JsonResponse|Responsable
      */
-    public function show(int $id): SuccesResponse|Response
+    public function show(int $id): JsonResponse|Responsable
     {
         // возвращает информацию о фильме.
         // если фильм не существует 404:
         // HTTP_NOT_FOUND
         // Или все ОК - HTTP_OK
-        return new SuccesResponse();
+        return $this->success(Film::find($id));
     }
 
     /**
@@ -80,9 +65,9 @@ class FilmController extends Controller
      *
      * @param  Request  $request
      * @param  int  $id ID film
-     * @return SuccesResponse|Response
+     * @return JsonResponse|Responsable
      */
-    public function update(Request $request, int $id): SuccesResponse|Response
+    public function update(Request $request, int $id): JsonResponse|Responsable
     {
         // используется как часть функциональности формы добавления фильма в базу.
         // Метод доступен только аутентифицированному пользователю с ролью модератор.
@@ -90,7 +75,7 @@ class FilmController extends Controller
         // При отсутствии запрошенного в роуте фильма в базе, возвращается 404 ошибка:
         // HTTP_NOT_FOUND
         // Или все ОК - HTTP_OK
-        return new SuccesResponse();
+        return $this->success();
     }
 
     /**
@@ -99,14 +84,14 @@ class FilmController extends Controller
      * @api {get} /api/films/{id}/similar
      *
      * @param int $id ID film
-     * @return SuccesResponse|Response
+     * @return JsonResponse|Responsable
      */
-    public function getSimilar(int $id): SuccesResponse|Response
+    public function getSimilar(int $id): JsonResponse|Responsable
     {
         // метод возвращает список из 4 подходящих фильмов.
         // Похожесть определяется принадлежностью к тем же жанрам,
         // что и исходный фильм (любым из имеющихся).
         // HTTP_OK
-        return new SuccesResponse();
+        return $this->success();
     }
 }
