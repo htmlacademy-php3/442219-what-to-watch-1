@@ -37,7 +37,7 @@ class FilmFactory extends Factory
             'run_time' => $this->faker->randomNumber(3, false),
             'released' => (int) $this->faker->year(),
             'status' => Film::FILM_PENDING,
-            'imdb_id' => $this->faker->word(),
+            'imdb_id' => $this->faker->unique()->numerify('tt#######'),
         ];
     }
 
