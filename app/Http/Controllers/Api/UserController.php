@@ -4,22 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Responses\SuccesResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
-    protected $userModel;
-
-    /**
-     * UserController constructor.
-     *
-     * @param $userModel
-     */
-    public function __construct($userModel)
-    {
-        $this->userModel = $userModel;
-    }
 
     /**
      * Getting a user profile.
@@ -27,14 +16,14 @@ class UserController extends Controller
      * @api {get} /api/user
      *
      * @param  int  $id ID user
-     * @return SuccesResponse|Response
+     * @return JsonResponse|Responsable
      */
-    public function show(int $id): SuccesResponse|Response
+    public function show(int $id): JsonResponse|Responsable
     {
         // чтение в БД информации о текущем пользователе
         // возвращает информацию о пользователе: имя, email, аватар и роль пользователя.
         // HTTP_OK
-        return new SuccesResponse();
+        return $this->success();
     }
 
     /**
@@ -44,9 +33,9 @@ class UserController extends Controller
      *
      * @param  Request  $request
      * @param  int  $id
-     * @return SuccesResponse|Response
+     * @return JsonResponse|Responsable
      */
-    public function update(Request $request, int $id): SuccesResponse|Response
+    public function update(Request $request, int $id): JsonResponse|Responsable
     {
         // валидация формы
         // если не успешно, то возвращаем ошибка валидации
@@ -54,6 +43,6 @@ class UserController extends Controller
         // если не успешно, то возвращаем ошибка записи в БД...
         // успешная запись - успешный ответ
         // HTTP_ACCEPTED
-        return new SuccesResponse();
+        return $this->success();
     }
 }

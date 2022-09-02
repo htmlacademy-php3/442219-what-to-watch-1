@@ -34,7 +34,7 @@ return new class extends Migration
                 ->nullable();
             $table->smallInteger('run_time')
                 ->nullable();
-            $table->year('released')
+            $table->integer('released')
                 ->nullable();
             $table->tinyInteger('status');
 //          статус из списка: pending, on moderation, ready

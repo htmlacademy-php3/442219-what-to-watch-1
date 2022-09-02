@@ -28,6 +28,24 @@ class Film extends Model
         'status' => self::FILM_PENDING,
     ];
 
+    /**
+     * Attributes for which mass assignment of values is allowed.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'name',
+        'poster_image',
+        'preview_image',
+        'background_image',
+        'background_color',
+        'video_link',
+        'description',
+        'run_time',
+        'released',
+        'imdb_id',
+    ];
+
     public function promo(): HasOne
     {
         return $this->hasOne(Promo::class);

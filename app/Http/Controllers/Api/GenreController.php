@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Responses\SuccesResponse;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\GenreUpdateRequest;
+use App\Models\Genre;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\JsonResponse;
 
 class GenreController extends Controller
 {
@@ -14,25 +15,25 @@ class GenreController extends Controller
      *
      * @api {get} /api/genres
      *
-     * @return SuccesResponse|Response
+     * @return JsonResponse|Responsable
      */
-    public function index(): SuccesResponse|Response
+    public function index(): JsonResponse|Responsable
     {
-        return new SuccesResponse();
+        return $this->success(Genre::all());
     }
 
     /**
      * Genre Editing.
      *
+     * @param GenreUpdateRequest $request
+     * @param Genre $genre
+     * @return JsonResponse|Responsable
      * @api {patch} /api/genres/{genre}
-     *
-     * @param  Request  $request
-     * @param  string  $genre
-     * @return SuccesResponse|Response
      */
-    public function update(Request $request, string $genre): SuccesResponse|Response
+    public function update(GenreUpdateRequest $request, Genre $genre): JsonResponse|Responsable
     {
-        // Метод доступен только аутентифицированному пользователю с ролью модератор.
-        return new SuccesResponse();
+        $genre->update($request->validated());
+
+        return $this->success($genre->fresh());
     }
 }
