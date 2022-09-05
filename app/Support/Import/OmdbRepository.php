@@ -25,8 +25,8 @@ class OmdbRepository implements FilmRepository
         $film->fill([
             'name' => $film['name'] ?? $data['title'],
             'description' => $data['plot'],
-            'imdb_id' => $data['imdbID'],
             'status' => Film::FILM_MODERATE,
+            'imdb_id' => $film['imdb_id'] ?? $data['imdbID'],
         ]);
 
         return [
