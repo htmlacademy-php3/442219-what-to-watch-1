@@ -44,7 +44,7 @@ class SaveFilmJob implements ShouldQueue
         $starsIds = [];
 
         foreach ($genres as $genre) {
-            $genresIds[] = Genre::firstOrCreate(['title' => $genre])->id;
+            $genresIds[] = Genre::firstOrCreate(['title' => trim($genre)])->id;
         }
 
         foreach ($directors as $director) {
@@ -52,7 +52,7 @@ class SaveFilmJob implements ShouldQueue
         }
 
         foreach ($stars as $star) {
-            $starsIds[] = Star::firstOrCreate(['name' => $star])->id;
+            $starsIds[] = Star::firstOrCreate(['name' => trim($star)])->id;
         }
 
         DB::beginTransaction();

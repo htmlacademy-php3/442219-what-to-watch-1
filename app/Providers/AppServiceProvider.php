@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
+use App\Support\Import\AcademyRepository;
 use App\Support\Import\FilmRepository;
-use App\Support\Import\OmdbRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(FilmRepository::class, OmdbRepository::class);
+        $this->app->bind(FilmRepository::class, AcademyRepository::class);
     }
 
     /**

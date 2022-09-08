@@ -20,6 +20,10 @@ return [
         'apikey' => env('OMDBAPI_KEY'),
     ],
 
+    'academyrep' => [
+        'url' => env('ACADEMY_REP_URL', 'http://guide.phpdemo.ru/api/films/'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
