@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddFilmRequest;
+use App\Jobs\AddFilmJob;
 use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Responsable;
@@ -39,6 +40,7 @@ class FilmController extends Controller
         // HTTP_UNPROCESSABLE_ENTITY
         // Или все ОК - HTTP_OK
         // При сохранении проверяем наличие связанных жанров и создаем при отсутствии.
+        AddFilmJob::dispatch($request->imdb);
 
         return $this->success(null, 201);
     }

@@ -3,6 +3,7 @@
 namespace App\Support\Import;
 
 use App\Models\Film;
+use App\Models\Genre;
 use Illuminate\Support\Facades\Http;
 
 class OmdbRepository implements FilmRepository
@@ -23,16 +24,23 @@ class OmdbRepository implements FilmRepository
 
         $film = Film::firstOrNew(['imdb_id' => $imdbId]);
         $film->fill([
-            'name' => $film['name'] ?? $data['title'],
-            'description' => $data['plot'],
+            'name' => $film['name'] ?? $data['Title'],
+            'poster_image' => $data['Poster'],
+            'background_color' => '#ffffff',
+            'description' => $data['Plot'],
+            'rating' => 1,
+            'run_time' => intval($data['Runtime']),
+            'released' => date('Y', strtotime($data['Released'])),
             'status' => Film::FILM_MODERATE,
             'imdb_id' => $film['imdb_id'] ?? $data['imdbID'],
         ]);
 
         return [
             'film' => $film,
+            'genres' => explode(', ', $data['Genre']),
+            'stars' => explode(', ', $data['Actors']),
+            'directors' => explode(', ', $data['Director']),
         ];
-
     }
 
     /**
